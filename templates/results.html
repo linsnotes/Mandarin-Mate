@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Words Information</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Generated List of Chinese Words</h2>
+    
+    {% if errors %}  <!-- Check if there are any errors -->
+    <div class="errors">
+        <h3>Errors:</h3>
+        <ul>
+            {% for error in errors %}
+                <li>{{ error }}</li>  <!-- Display each error -->
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <table>
+        <tr>
+            <th>S/N</th>  <!-- Add this line for the S/N header -->
+            <th>Word</th>
+            <th>Hanyu Pinyin</th>
+            <th>Chinese Meaning</th>
+            <th>English Meaning</th>
+            <th>Common Collocations</th>
+            <th>Example Sentences</th>
+        </tr>
+        {% for idx, (word, info) in word_dict.items()|enumerate %}
+            <tr>
+                <!-- Check if there is content in the row before displaying the S/N -->
+                <td>{% if word or info['Hanyu Pinyin'] or info['Chinese Meaning'] or info['English Meaning'] or info['Common Collocations'] or info['Example Sentences'] %}{{ idx + 1 }}{% endif %}</td>
+                <td>{{ word }}</td>
+                <td>{{ info['Hanyu Pinyin'] }}</td>
+                <td>{{ info['Chinese Meaning'] }}</td>
+                <td>{{ info['English Meaning'] }}</td>
+                <td>{{ info['Common Collocations']|join('<br>')|safe }}</td>
+                <td>{{ info['Example Sentences']|join('<br>')|safe }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    </body>
+    </html>
