@@ -11,7 +11,7 @@ app = Flask(__name__)
 # Constants
 MAX_RETRIES = 3
 SLEEP_DURATION = 2
-MODEL = "gpt-4"
+MODEL = "gpt-3.5-turbo"
 
 # Configure logging
 logging.basicConfig(level=logging.ERROR, filename='app.log', filemode='a', format='%(name)s - %(levelname)s - %(message)s')
